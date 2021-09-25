@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-      @users = User.all
+    @users = User.all
   end
 
   def new
@@ -9,30 +9,27 @@ class UsersController < ApplicationController
   end
 
   def create
-   # Strong Parameter の記述
-   User.create(user_params)
-   redirect_to action: :index
+    User.create(user_params)
   end
 
   def edit
     @user = User.find(params[:id])
   end
 
+  # 以下のアクションを追加
   def update
     user = User.find(params[:id])
     user.update(user_params)
-    redirect_to action: :index
   end
 
   def destroy
     user = User.find(params[:id])
     user.destroy
-    redirect_to action: :index
   end
 
   private
   def user_params
-   params.require(:user).permit(:name, :age)
+    params.require(:user).permit(:name, :age)
   end
 
 end
